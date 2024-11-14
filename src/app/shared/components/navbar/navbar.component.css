@@ -1,0 +1,70 @@
+/* Estilos para la barra lateral (sidebar) */
+.layout-sidebar {
+    width: 250px;
+    transition: width 0.3s ease;
+    background-color: #696464; /* Fondo gris oscuro */
+    color: #ffffff; /* Texto en blanco */
+    position: relative;
+}
+
+.layout-sidebar.collapsed {
+    width: 60px;
+    overflow: hidden;
+}
+
+/* Botón para colapsar el sidebar */
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: #ffffff; /* Texto blanco */
+    padding: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: -2.5rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.sidebar-toggle-btn .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;base64,..."); /* Icono SVG de Bootstrap */
+}
+
+/* Ajuste del contenido al lado del sidebar */
+.layout-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+.layout-sidebar.collapsed + .layout-content {
+    margin-left: 60px;
+}
+
+/* Botón "Iniciar Sesión" (Borde verde con fondo blanco) */
+.navbar .btn-outline-primary {
+    border-color: #16a085; /* Borde verde */
+    color: #16a085; /* Texto verde */
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-outline-primary:hover {
+    background-color: #16a085; /* Fondo verde al hover */
+    color: #ffffff; /* Texto blanco al hover */
+    border-color: #16a085;
+}
+
+/* Botón "Únete Ahora" (Fondo verde con texto blanco) */
+.navbar .btn-primary {
+    background-color: #16a085; /* Fondo verde */
+    color: #ffffff; /* Texto blanco */
+    border-radius: 5px;
+    padding: 8px 20px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-primary:hover {
+    background-color: #1abc9c; /* Fondo verde más claro al hover */
+}

@@ -1,0 +1,177 @@
+/* Estilos generales */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Georgia', serif; /* Actualizado a Georgia */
+  background-color: #f7f4ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor del formulario de inicio de sesión */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Tarjeta de inicio de sesión */
+.login-card {
+  display: flex;
+  width: 85%;
+  max-width: 900px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Imagen de login con superposición de texto */
+.login-image {
+  width: 45%;
+  background-color: #696464;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-overlay-text {
+  position: absolute;
+  color: #ffffff;
+  text-align: center;
+  z-index: 1;
+}
+
+.image-overlay-text h2 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.image-overlay-text p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Formulario de inicio de sesión */
+.login-form {
+  width: 55%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado del formulario */
+.login-form h2 {
+  color: #1abc9c;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Campos de entrada */
+.form-field {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.custom-input {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  font-family: 'Georgia', serif;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+}
+
+/* Botón de envío */
+.submit-button {
+  background-color: #1abc9c;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #158467;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:disabled {
+  background-color: #b2b2b2;
+  cursor: not-allowed;
+}
+
+/* Mensajes de error */
+.error-text {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.error-input {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+/* Enlaces de recuperación y registro */
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.links p {
+  color: #7f8c8d;
+}
+
+a {
+  color: #1abc9c;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .login-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .login-form {
+    width: 100%;
+    padding: 20px;
+  }
+}

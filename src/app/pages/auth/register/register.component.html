@@ -1,0 +1,75 @@
+<section class="register-container">
+  <div class="register-card">
+    <!-- Imagen de bienvenida -->
+    <div class="register-image">
+      <div class="register-overlay">
+        <h3 class="register-text">Bienvenido a ReadEDU</h3>
+        <p class="register-description">
+          Únete a nuestra comunidad y comienza tu aventura literaria hoy.
+        </p>
+      </div>
+    </div>
+
+    <!-- Formulario de registro -->
+    <div class="register-form">
+      <h2 class="form-title">Únete Ahora</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <!-- Campo de Nombre -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="firstName" placeholder="Nombre*">
+          @if(controlHasError('firstName', 'required')) {
+            <mat-error>Este campo es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo de Apellido -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="lastName" placeholder="Apellido*">
+          @if(controlHasError('lastName', 'required')) {
+            <mat-error>Este campo es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo de Correo Electrónico -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Correo Electrónico*">
+          @if(controlHasError('email', 'required')) {
+            <mat-error>Este campo es obligatorio</mat-error>
+          }
+          @if(controlHasError('email', 'email')) {
+            <mat-error>Introduzca un correo electrónico válido</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo de Contraseña -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Contraseña*">
+          @if(controlHasError('password', 'required')) {
+            <mat-error>Este campo es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo de Breve Biografía -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Breve Biografía</mat-label>
+          <textarea matInput formControlName="biography" rows="3" placeholder="Escribe una breve biografía*"></textarea>
+          @if(controlHasError('biography', 'required')) {
+            <mat-error>Este campo es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Botón de Registro -->
+        <button mat-raised-button color="primary" class="submit-button" type="submit" [disabled]="registerForm.invalid">
+          Registrarse
+        </button>
+      </form>
+      <div class="links">
+        <p>¿Ya tienes cuenta? <a routerLink="/auth/login">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+</section>

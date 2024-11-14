@@ -1,0 +1,57 @@
+<section class="login-container">
+  <div class="login-card">
+    <!-- Imagen de bienvenida -->
+    <div class="login-image">
+      <div class="image-overlay-text">
+        <h2>Bienvenido a ReadEDU</h2>
+        <p>Inicia sesión para continuar</p>
+      </div>
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <div class="login-form">
+      <h2>Iniciar Sesión</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Campo de Correo Electrónico -->
+        <div class="form-field">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Correo Electrónico*">
+
+            <!-- Validación usando `@if` -->
+            @if (controlHasError('email', 'required')) {
+              <mat-error>El correo es requerido</mat-error>
+            }
+            @if (controlHasError('email', 'email')) {
+              <mat-error>Correo no válido</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Campo de Contraseña -->
+        <div class="form-field">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Contraseña*">
+
+            <!-- Validación usando `@if` -->
+            @if (controlHasError('password', 'required')) {
+              <mat-error>La contraseña es requerida</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Botón de Enviar -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="submit-button">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <!-- Enlaces de Recuperación y Registro -->
+      <div class="links">
+        <p>¿Te olvidaste tu contraseña? <a routerLink="/auth/recover">Recupera aquí</a></p>
+        <p>¿No tienes cuenta? <a routerLink="/auth/register">Regístrate aquí</a></p>
+      </div>
+    </div>
+  </div>
+</section>
