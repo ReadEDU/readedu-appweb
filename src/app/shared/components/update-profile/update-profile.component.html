@@ -1,1 +1,44 @@
-<p>update-profile works!</p>
+<section class="update-profile-container">
+    <div class="update-profile-card">
+      <div class="update-profile-form">
+        <h2>Actualizar Perfil</h2>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="firstName" placeholder="Ingrese su nombre">
+            @if (controlHasError('firstName', 'required')) {
+              <mat-error>Este campo es obligatorio</mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field class="form-field">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="lastName" placeholder="Ingrese su apellido">
+            @if (controlHasError('lastName', 'required')) {
+              <mat-error>Este campo es obligatorio</mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field class="form-field">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Ingrese su correo electrónico">
+            @if (controlHasError('email', 'required')) {
+              <mat-error>Este campo es obligatorio</mat-error>
+            }
+            @if (controlHasError('email', 'email')) {
+              <mat-error>Introduzca un correo electrónico válido</mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field class="form-field">
+            <mat-label>Biografia</mat-label>
+            <input matInput formControlName="biography" placeholder="Ingrese su biografia">
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" class="submit-button" type="submit" [disabled]="profileForm.invalid">
+            Guardar Cambios
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>

@@ -1,1 +1,12 @@
-<p>user-profile works!</p>
+<div class="container">
+    <h2>Perfil de Usuario</h2>
+    <p><strong>Nombre:</strong> {{ profile.firstName }} {{ profile.lastName }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+  
+    <p><strong>Biografia:</strong> {{ profile.biography }}</p>
+  
+    <!-- Botón para actualizar perfil -->
+    <button (click)="navigateToUpdateProfile()" class="update-button">
+      Actualizar Perfil
+    </button>
+  </div>

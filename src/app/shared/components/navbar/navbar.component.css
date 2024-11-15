@@ -68,3 +68,9 @@
 .navbar .btn-primary:hover {
     background-color: #1abc9c; /* Fondo verde más claro al hover */
 }
+
+.navbar-logo {
+    width: 30px; /* Ajusta el tamaño del logo según lo que prefieras */
+    height: auto;
+  }
+  

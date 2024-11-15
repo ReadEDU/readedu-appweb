@@ -1,0 +1,76 @@
+.update-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .update-profile-card {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  
+  .update-profile-form h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #6cbf84;
+    padding-bottom: 10px;
+  }
+  
+  .form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-form-field label {
+    color: #2c3e50;
+  }
+  
+  .mat-input-element {
+    color: #333;
+  }
+  
+  .mat-hint,
+  .mat-error {
+    font-size: 13px;
+    color: #d9534f;
+  }
+  
+  .submit-button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #6cbf84;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #5ba873;
+  }
+  
+  @media (max-width: 600px) {
+    .update-profile-card {
+      padding: 20px;
+    }
+  
+    .update-profile-form h2 {
+      font-size: 22px;
+    }
+  }

@@ -2,23 +2,28 @@
 body, html {
   height: 100%;
   margin: 0;
-  font-family: 'Georgia', serif;
-  background-color: #f7f4ed;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Contenedor de la tarjeta de registro */
+/* Contenedor del formulario de registro */
 .register-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f7f4ed;
   min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* Tarjeta de registro */
 .register-card {
   display: flex;
+  flex-direction: row;
   width: 85%;
   max-width: 900px;
   border-radius: 12px;
@@ -27,47 +32,69 @@ body, html {
   background-color: #ffffff;
 }
 
-/* Imagen de bienvenida con superposición de texto */
+/* Imagen de bienvenida */
 .register-image {
-  width: 45%;
-  background-color: #3d3d3d;
+  flex: 1;
+  background-color: #3b3b3b;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-}
-
-.register-overlay {
-  position: absolute;
-  text-align: center;
-  color: #ffffff;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
+  overflow: hidden;
 }
 
-.register-text {
+.book-logo {
+  width: 90%;
+  height: auto;
+  max-width: 400px; /* Tamaño máximo más grande */
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px; /* Bordes redondeados */
+}
+
+.image-overlay-text {
+  position: absolute;
+  color: #ffffff;
+  text-align: center;
+  z-index: 1;
+}
+
+.image-overlay-text h2 {
   font-size: 1.8rem;
-  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.register-description {
+.image-overlay-text p {
   font-size: 1rem;
-  line-height: 1.5;
+  margin: 0;
+}
+
+.register-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 0;
 }
 
 /* Formulario de registro */
 .register-form {
-  width: 55%;
+  flex: 1;
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
 }
 
-.form-title {
-  text-align: center;
+.register-form h2 {
   color: #1abc9c;
+  font-weight: bold;
+  text-align: center;
   margin-bottom: 20px;
   font-size: 2rem;
 }
@@ -76,27 +103,36 @@ body, html {
   margin-bottom: 20px;
 }
 
-.mat-form-field {
+.full-width {
   width: 100%;
 }
 
+mat-form-field .mat-error {
+  font-size: 0.9rem;
+  color: #e74c3c;
+}
+
 .submit-button {
-  background-color: #1abc9c;
+  background-color: #1abc9c !important;
   color: #ffffff;
-  padding: 12px;
   border: none;
   border-radius: 8px;
+  padding: 12px;
+  width: 100%;
   font-weight: bold;
+  font-size: 1.2rem;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #158467;
+  background-color: #158467 !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .submit-button:disabled {
-  background-color: #b2b2b2;
+  background-color: #b2b2b2 !important;
   cursor: not-allowed;
 }
 
@@ -105,8 +141,13 @@ body, html {
   margin-top: 20px;
 }
 
+.links p {
+  color: #7f8c8d;
+}
+
 .links a {
   color: #1abc9c;
+  text-decoration: none;
 }
 
 .links a:hover {
@@ -117,6 +158,8 @@ body, html {
 @media (max-width: 768px) {
   .register-card {
     flex-direction: column;
+    width: 100%;
+    max-width: 600px;
   }
 
   .register-image {

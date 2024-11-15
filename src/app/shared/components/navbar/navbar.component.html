@@ -1,12 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a href="#" class="navbar-brand" href="#">ReadEDU</a>
+    <!-- Logo e Identidad de la Marca -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="assets/images/logo.png" alt="Logo" class="navbar-logo">
+      <span class="ms-2">ReadEDU</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-
+        @if(!isAuthenticated) {
         <li class="nav-item">
           <a class="nav-link" routerLink="/home">Artículos</a>
         </li>
@@ -16,15 +20,17 @@
         <li class="nav-item ms-3">
           <a class="btn btn-outline-primary" routerLink="/auth/register">Únete ahora</a>
         </li>
-
+        } @else {
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">Mi
-            Perfil</a>
+          <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
+            Mi Perfil
+          </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="/reader/profile">Ver Perfil</a></li>
             <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesión</a></li>
           </ul>
         </li>
+        }
       </ul>
     </div>
   </div>

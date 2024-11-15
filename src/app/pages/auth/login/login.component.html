@@ -3,8 +3,8 @@
     <!-- Imagen de bienvenida -->
     <div class="login-image">
       <div class="image-overlay-text">
-        <h2>Bienvenido a ReadEDU</h2>
-        <p>Inicia sesión para continuar</p>
+        <!-- Imagen del libro debajo del texto -->
+        <img src="assets/images/intro-bienvenida.png" alt="Imagen de bienvenida" class="book-logo">
       </div>
     </div>
 
@@ -17,8 +17,6 @@
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Correo Electrónico</mat-label>
             <input matInput type="email" formControlName="email" placeholder="Correo Electrónico*">
-
-            <!-- Validación usando `@if` -->
             @if (controlHasError('email', 'required')) {
               <mat-error>El correo es requerido</mat-error>
             }
@@ -33,8 +31,6 @@
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Contraseña</mat-label>
             <input matInput type="password" formControlName="password" placeholder="Contraseña*">
-
-            <!-- Validación usando `@if` -->
             @if (controlHasError('password', 'required')) {
               <mat-error>La contraseña es requerida</mat-error>
             }

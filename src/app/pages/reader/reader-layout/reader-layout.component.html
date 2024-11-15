@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="layout-dashboard">
+  <!-- Botón para ocultar/mostrar el sidebar -->
+  <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Barra lateral -->
+  <div class="layout-sidebar" [class.collapsed]="isSidebarActive">
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/articles" routerLinkActive="active">
+            <i class="fas fa-newspaper"></i> Artículos
+          </a>
+        </li>
+        <li>
+          <a routerLink="/donations" routerLinkActive="active">
+            <i class="fas fa-heart"></i> Donaciones
+          </a>
+        </li>
+        <li>
+          <a routerLink="/favorites" routerLinkActive="active">
+            <i class="fas fa-star"></i> Favoritos
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="layout-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-footer></app-footer>

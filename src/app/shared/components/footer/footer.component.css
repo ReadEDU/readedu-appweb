@@ -1,35 +1,41 @@
-/* Estructura general */
-body, html{
+body, html {
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
-}
-
-.content-wrapper {
+  }
+  
+  .page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-wrap {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    padding-top: 60px;
-    box-sizing: border-box;
-}
-
-/* Footer */
-footer {
+  }
+  
+  footer {
     background-color: #f7f4ed;
     color: #333;
-    padding: 40px 0;
+    padding: 20px 0;
     border-top: 1px solid #e0e0e0;
     text-align: center;
-}
-footer a {
+    width: 100%;
+  }
+  
+  footer a {
     color: #16a085;
     text-decoration: none;
     margin: 0 10px;
-}
-footer a:hover {
+  }
+  
+  footer a:hover {
     color: #1abc9c;
-}
+  }
+  
