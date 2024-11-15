@@ -21,10 +21,17 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              
+              "src/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
