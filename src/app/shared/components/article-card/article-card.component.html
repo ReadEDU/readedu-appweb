@@ -1,0 +1,16 @@
+<mat-card class="article-card">
+    <mat-card-header>
+      <mat-card-title>{{ article.title }}</mat-card-title>
+      <mat-card-subtitle>Creador: {{ article.creatorName }}</mat-card-subtitle>
+    </mat-card-header>
+  
+    <img mat-card-image [src]="article.coverPath | apiImg" [alt]="article.title">
+  
+    <mat-card-content>
+      <p>{{ article.content }}</p>
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <button mat-button (click)="viewDetails()">Ver detalles</button>
+    </mat-card-actions>
+  </mat-card>

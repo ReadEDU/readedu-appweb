@@ -9,7 +9,6 @@ import { environment } from '../../../environments/environment';
 export class ApiImgPipe implements PipeTransform {
 
   transform(path: string): string {
-    return `${environment.apiURL}/media/${path}`;
+    return `${environment.apiURL}/media/${path}`;;
   }
-
 }

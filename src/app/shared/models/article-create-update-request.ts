@@ -3,8 +3,10 @@ export interface ArticleCreateUpdateRequest {
     title: string;
     slug: string;
     content: string;
+
     coverPath: string;
     filePath: string;
+    
     categoryId: number;
     creatorId: number;
 }
