@@ -85,7 +85,7 @@ export class LoginComponent {
     if (userRole === this.READER_ROLE) {
       this.router.navigate([this.READER_ROUTE]);
     } else if (userRole === this.CREATOR_ROLE) {
-      this.router.navigate([this.CREATOR_ROLE]);
+      this.router.navigate([this.CREATOR_ROUTE]);
     } else {
       this.router.navigate([this.DEFAULT_ROUTE]);
     }

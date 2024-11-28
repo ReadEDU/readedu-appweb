@@ -79,22 +79,30 @@ export class UpdateProfileComponent implements OnInit {
 
   // Método que se ejecuta al enviar el formulario
   onSubmit(): void {
-    // Verificamos si el formulario es válido antes de enviar
     if (this.profileForm.valid) {
       const updatedData = { ...this.profile, ...this.profileForm.value }; // Combinamos el perfil actual con los nuevos datos
-
+  
       // Llamamos al servicio para actualizar el perfil del usuario
       this.userProfileService.updateUserProfile(this.profile.id, updatedData).subscribe({
         next: () => {
           this.showSnackBar('Perfil actualizado exitosamente.');
-          this.router.navigate(['/reader/profile']); // Redirigimos a la página del perfil
+  
+          // Obtener el rol del usuario para redirigirlo correctamente
+          const role = this.authService.getUserRole(); // Obtener el rol del usuario
+  
+          // Redirigir dependiendo del rol
+          if (role === 'CREATOR') {
+            this.router.navigate(['/creator/profile']);
+          } else {
+            this.router.navigate(['/reader/profile']);
+          }
         },
         error: (error) => {
           this.showSnackBar(error.error?.message || 'Error al actualizar el perfil.');
         }
       });
     }
-  }
+  }  
 
   // Método para mostrar un mensaje en una barra de notificación
   private showSnackBar(message: string): void {
