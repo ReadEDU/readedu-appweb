@@ -1,0 +1,39 @@
+<app-navbar />
+
+<div class="layout-dashboard">
+
+  <button
+    class="sidebar-toggle-btn"
+    [class.active]="isSidebarActive"
+    (click)="toggleSidebar()"
+  >
+    <span
+      class="navbar-toggler-icon"
+      [ngClass]="{
+        'icon-white': !isSidebarActive,
+        'icon-black': isSidebarActive
+      }"
+    >
+    </span>
+  </button>
+
+  <div class="layout-sidebar" [class.collapsed]="isSidebarActive">
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/creator/articles/list" routerLinkActive="active">
+            <i class="fas fa-articles"></i> Articulos
+          </a>
+        </li>
+       </ul>
+    </nav>
+  </div>
+
+
+  <div class="layout-content">
+    <router-outlet />
+  </div>
+</div>
+
+
+<app-footer />
