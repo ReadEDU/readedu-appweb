@@ -4,31 +4,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HomeService } from '../../../core/services/home.service';
-import { Router } from '@angular/router';
-import { ArticleCardComponent } from '../../../shared/components/article-card/article-card.component';
 import { ArticleDetailsResponse } from '../../../shared/models/article-details-response.model';
+import { ArticleCardComponent } from '../../../shared/components/article-card/article-card.component';
+import { ApiImgPipe } from '../../../core/pipes/api-img.pipe';
 
 @Component({
-  selector: 'app-catalog',
+  selector: 'app-home',
   standalone: true,
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    ArticleCardComponent,
-  ],
-  templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.css'],
+    MatFormFieldModule, MatInputModule, MatIconModule, FormsModule,
+    ArticleCardComponent
+],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class CatalogComponent {
+export class HomeComponent implements OnInit {
   recentArticles: ArticleDetailsResponse[] = [];
   filteredArticles: ArticleDetailsResponse[] = [];
   searchQuery: string = '';
 
   private articleService = inject(HomeService);
-
-  private router = inject(Router);
 
   constructor() {}
 
@@ -38,17 +33,15 @@ export class CatalogComponent {
         this.recentArticles = articles;
         this.filteredArticles = articles;
       },
-      error: (error) =>
-        console.error('Error al cargar los articulos recientes', error),
+      error: (error) => console.error('Error al cargar los articulos recientes', error)
     });
   }
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredArticles = this.recentArticles.filter(
-      (article) =>
-        article.title.toLowerCase().includes(query) ||
-        article.creatorName.toLowerCase().includes(query)
+    this.filteredArticles = this.recentArticles.filter(article =>
+      article.title.toLowerCase().includes(query) ||
+      article.creatorName.toLowerCase().includes(query)
     );
   }
 }

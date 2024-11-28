@@ -1,0 +1,49 @@
+.reviews-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .review-card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .mat-card-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .review-avatar {
+    background-color: #1abc9c;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .rating {
+    color: #ffd700; /* Estrellas doradas */
+    margin: 5px 0;
+  }
+  
+  .comment {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-top: 10px;
+  }
+  
+  
+  .review-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+  }

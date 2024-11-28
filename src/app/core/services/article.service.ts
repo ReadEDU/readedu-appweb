@@ -10,36 +10,36 @@ import { PageableResponse } from '../../shared/models/pageable.response.model';
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiURL = `${environment.apiURL}/admin/articles`;
+  private baseURL = `${environment.apiURL}/admin/articles`;
   private http = inject(HttpClient);
 
   getArticleDetails(): Observable<ArticleDetailsResponse[]> {
-    return this.http.get<ArticleDetailsResponse[]>(`${this.apiURL}`);
+    return this.http.get<ArticleDetailsResponse[]>(`${this.baseURL}`);
   }
 
   paginateArticles(page: number, size: number): Observable<PageableResponse<ArticleDetailsResponse>> {
     const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
-    return this.http.get<PageableResponse<ArticleDetailsResponse>>(`${this.apiURL}/page`,
+    return this.http.get<PageableResponse<ArticleDetailsResponse>>(`${this.baseURL}/page`,
       { params });
   }
 
   createArticle(article: ArticleCreateUpdateRequest): Observable<ArticleDetailsResponse> {
-    return this.http.post<ArticleDetailsResponse>(`${this.apiURL}`, article);
+    return this.http.post<ArticleDetailsResponse>(`${this.baseURL}`, article);
   }
 
 
   getArticleDetailsById(id: number): Observable<ArticleDetailsResponse> {
-    return this.http.get<ArticleDetailsResponse>(`${this.apiURL}/${id}`);
+    return this.http.get<ArticleDetailsResponse>(`${this.baseURL}/${id}`);
   }
 
 
   updateArticle(id: number, article: ArticleCreateUpdateRequest): Observable<ArticleDetailsResponse> {
-    return this.http.put<ArticleDetailsResponse>(`${this.apiURL}/${id}`, article);
+    return this.http.put<ArticleDetailsResponse>(`${this.baseURL}/${id}`, article);
   }
 
 
   deleteArticle(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/${id}`);
+    return this.http.delete<void>(`${this.baseURL}/${id}`);
   }
 
 }
