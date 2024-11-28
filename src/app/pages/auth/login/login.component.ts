@@ -36,7 +36,13 @@ export class LoginComponent {
   private snackBar = inject(MatSnackBar); // Para mostrar mensajes emergentes (notificaciones)
   private authService = inject(AuthService); // Servicio para la autenticación del usuario
 
-  constructor() {
+  private readonly READER_ROLE = 'READER';
+  private readonly CREATOR_ROLE = 'CREATOR';
+  private readonly READER_ROUTE = '/reader/catalog';
+  private readonly CREATOR_ROUTE = '/creator/articles/list';
+  private readonly DEFAULT_ROUTE = '/home';
+
+   constructor() {
     // Inicializamos el formulario con los campos y validaciones necesarias
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]], // Campo de correo electrónico con validación
@@ -64,7 +70,7 @@ export class LoginComponent {
       // Si el inicio de sesión es exitoso
       next: () => {
         this.showSnackBar('Inicio de sesión exitoso'); // Mostramos un mensaje de éxito
-        this.router.navigate(['/reader']); // Navegamos a la página del lector
+        this.redirectUserBasedOnRole();// Navegamos a la página del lector
       },
       // Si hay un error durante el inicio de sesión
       error: () => {
@@ -72,6 +78,19 @@ export class LoginComponent {
       }
     });
   }
+
+  private redirectUserBasedOnRole(): void {
+    const userRole = this.authService.getUserRole();
+
+    if (userRole === this.READER_ROLE) {
+      this.router.navigate([this.READER_ROUTE]);
+    } else if (userRole === this.CREATOR_ROLE) {
+      this.router.navigate([this.CREATOR_ROUTE]);
+    } else {
+      this.router.navigate([this.DEFAULT_ROUTE]);
+    }
+  }
+
 
   // Método para mostrar un mensaje emergente (snack bar)
   private showSnackBar(message: string): void {

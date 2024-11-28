@@ -5,8 +5,8 @@ import { UpdateProfileComponent } from '../../shared/components/update-profile/u
 import { UserProfileComponent } from '../../shared/components/user-profile/user-profile.component';
 
 import { CollectionComponent } from './collection/collection.component';
-import { PurchasesComponent } from './purchases/purchases.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { DetailsComponent } from './catalog/details/details.component';
 
 export const readerRoutes: Routes = [
     {
@@ -14,8 +14,8 @@ export const readerRoutes: Routes = [
         component: ReaderLayoutComponent,
         children: [
             { path: 'catalog', component: CatalogComponent },
-            { path: 'purchases', component: PurchasesComponent },
-            { path: 'collection', component: CollectionComponent },
+            { path: 'catalog/details/:id', component: DetailsComponent },
+            { path: 'favorite', component: CollectionComponent },
             { path: 'profile', component: UserProfileComponent },
             { path: 'profile/update', component: UpdateProfileComponent },
         ]

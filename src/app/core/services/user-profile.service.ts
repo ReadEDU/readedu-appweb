@@ -16,7 +16,7 @@ import { UserProfile } from '../../shared/models/user-profile.model';
 })
 export class UserProfileService {
   // Definimos la URL base para las solicitudes relacionadas con el perfil del usuario
-  private apiURL = `${environment.apiURL}/user/profile`;
+  private baseURL = `${environment.apiURL}/user/profile`;
 
   // Usamos `inject()` para obtener una instancia de `HttpClient`
   private http = inject(HttpClient);
@@ -28,7 +28,7 @@ export class UserProfileService {
    */
   getUserProfile(userId: number): Observable<UserProfile> {
     // Realizamos una solicitud GET a la API para obtener el perfil del usuario
-    return this.http.get<UserProfile>(`${this.apiURL}/${userId}`);
+    return this.http.get<UserProfile>(`${this.baseURL}/${userId}`);
   }
 
   /**
@@ -42,6 +42,6 @@ export class UserProfileService {
     profileData: UserProfile
   ): Observable<UserProfile> {
     // Realizamos una solicitud PUT a la API para actualizar el perfil del usuario
-    return this.http.put<UserProfile>(`${this.apiURL}/${userId}`, profileData);
+    return this.http.put<UserProfile>(`${this.baseURL}/${userId}`, profileData);
   }
 }

@@ -1,35 +1,41 @@
-// Importamos los módulos necesarios desde Angular y nuestro servicio de autenticación
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
-// Decorador @Component para definir metadatos del componente
 @Component({
-  selector: 'app-navbar', // Selector que se utiliza en los templates para referirse a este componente
-  standalone: true, // Indica que es un componente standalone (Angular 15+), no necesita un módulo
-  imports: [RouterLink, RouterOutlet], // Importamos RouterLink y RouterOutlet para manejar rutas en el template
-  templateUrl: './navbar.component.html', // Ruta al archivo HTML de la plantilla
-  styleUrl: './navbar.component.css' // Ruta al archivo CSS con estilos para este componente
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet, MatIconModule],
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-
-  // Inyectamos el servicio de autenticación usando la función inject (Angular 16+)
-  private authService = inject(AuthService);
-
-  // Propiedad para verificar si el usuario está autenticado
   isAuthenticated: boolean = false;
+  isReader: boolean = false;
 
-  // Método del ciclo de vida del componente que se ejecuta al inicializar el componente
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   ngOnInit(): void {
-    // Verificamos si el usuario está autenticado usando el servicio de autenticación
     this.isAuthenticated = this.authService.isAuthenticated();
+    this.isReader = this.authService.getUserRole() === 'READER';
+  }
+
+
+  getProfileRoute(): string {
+    const role = this.authService.getUserRole(); // Obtenemos el rol del usuario
+    // Redirige según el rol
+    return role === 'CREATOR' ? '/creator/profile' : '/reader/profile';
   }
 
   // Método para cerrar sesión
+
   logout(): void {
-    // Llama al método de cierre de sesión en el servicio de autenticación
     this.authService.logout();
-    // Cambiamos el estado de isAuthenticated a false para actualizar la interfaz
     this.isAuthenticated = false;
+    this.isReader = false;
+    this.router.navigate(['/home']);
   }
+
 }
