@@ -26,7 +26,7 @@
             Mi Perfil
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/reader/profile">Ver Perfil</a></li>
+            <li><a class="dropdown-item" [routerLink]="getProfileRoute()">Ver Perfil</a></li>
             <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesión</a></li>
           </ul>
         </li>

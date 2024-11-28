@@ -22,6 +22,15 @@ export class NavbarComponent {
     this.isReader = this.authService.getUserRole() === 'READER';
   }
 
+
+  getProfileRoute(): string {
+    const role = this.authService.getUserRole(); // Obtenemos el rol del usuario
+    // Redirige según el rol
+    return role === 'CREATOR' ? '/creator/profile' : '/reader/profile';
+  }
+
+  // Método para cerrar sesión
+
   logout(): void {
     this.authService.logout();
     this.isAuthenticated = false;

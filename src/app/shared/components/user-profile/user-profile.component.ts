@@ -60,7 +60,12 @@ export class UserProfileComponent implements OnInit {
 
   // Método para navegar a la página de actualización del perfil
   navigateToUpdateProfile(): void {
-    this.router.navigate(['/reader/profile/update']); // Redirige al usuario a la página para actualizar el perfil
+    const user = this.authService.getUser(); // Obtiene los datos del usuario
+    const role = user?.role; // Obtén el rol del usuario
+    
+    // Redirige a la ruta correspondiente dependiendo del rol
+    const route = role === 'CREATOR' ? '/creator/profile/update' : '/reader/profile/update'; 
+    this.router.navigate([route]); // Realiza la redirección
   }
 
   // Método para mostrar mensajes en la barra de notificación
