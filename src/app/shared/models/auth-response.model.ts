@@ -4,4 +4,6 @@ export interface AuthResponse{
     firstName:string;
     lastName:string;
     role:string;
+    readerId:number;
+    creatorId:number;
 }
