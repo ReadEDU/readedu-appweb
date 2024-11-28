@@ -16,8 +16,7 @@ export const readerRoutes: Routes = [
         children: [
             { path: 'catalog', component: CatalogComponent },
             { path: 'catalog/details/:id', component: DetailsComponent },
-            { path: 'purchases', component: PurchasesComponent },
-            { path: 'collection', component: CollectionComponent },
+            { path: 'favorite', component: CollectionComponent },
             { path: 'profile', component: UserProfileComponent },
             { path: 'profile/update', component: UpdateProfileComponent },
         ]

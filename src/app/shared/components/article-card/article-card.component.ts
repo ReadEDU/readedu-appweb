@@ -14,8 +14,8 @@ import { ArticleDetailsResponse } from '../../models/article-details-response.mo
   styleUrls: ['./article-card.component.css'],
 })
 export class ArticleCardComponent {
-  @Input() book!: ArticleDetailsResponse;
-  isCustomer: boolean = false;
+  @Input() article!: ArticleDetailsResponse;
+  isReader: boolean = false;
 
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -23,13 +23,13 @@ export class ArticleCardComponent {
   constructor() {}
 
   ngOnInit(): void {
-    this.isCustomer = this.authService.getUserRole() === 'CUSTOMER';
+    this.isReader = this.authService.getUserRole() === 'READER';
   }
 
   viewDetails() {
-    const routePath = this.isCustomer
+    const routePath = this.isReader
       ? '/reader/catalog/details'
       : '/home/article-details';
-    this.router.navigate([routePath, this.book.id]);
+    this.router.navigate([routePath, this.article.id]);
   }
 }

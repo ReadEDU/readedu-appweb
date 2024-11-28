@@ -1,33 +1,34 @@
 @if(article){
-    <mat-card class="article-details-card">
-      <!-- Imagen del libro a la izquierda (o arriba en pantallas pequeñas) -->
-      <img mat-card-image class="article-cover" [src]="article.coverPath | apiImg" [alt]="article.title">
-  
-      <!-- Contenido de los detalles a la derecha (o abajo en pantallas pequeñas) -->
-      <div class="article-content">
-        <mat-card-title class="article-title">{{ article.title }}</mat-card-title>
-        <mat-card-subtitle class="article-subtitle">Creador: {{ article.creatorName }} - Categoría: {{ article.categoryName }}</mat-card-subtitle>
-  
-        <mat-card-content>
-          <p class="article-description">{{ article.description }}</p>
-          <p class="article-date"><strong>Publicado el:</strong> {{ article.createdAt | date }}</p>
-          <p class="article-date"><strong>Última actualización:</strong> {{ article.updatedAt | date }}</p>
-        </mat-card-content>
-  
-  
-        <div class="button-group">
-          @if(isAuthenticated && isCustomer) {
-            <button class="back-button" (click)="goBackToHome()">Regresar a Home</button>
-          }@else {
-            <button class="back-button" (click)="goBackToHome()">Regresar a Home</button>
-          }
-  
-        </div>
-  
+  <mat-card class="article-details-card">
+    <!-- Imagen del libro a la izquierda (o arriba en pantallas pequeñas) -->
+    <img mat-card-image class="article-cover" [src]="article.coverPath | apiImg" [alt]="article.title">
+
+    <!-- Contenido de los detalles a la derecha (o abajo en pantallas pequeñas) -->
+    <div class="article-content">
+      <mat-card-title class="article-title">{{ article.title }}</mat-card-title>
+      <mat-card-subtitle class="article-subtitle">Autor: {{ article.creatorName }} - Categoría: {{ article.categoryName }}</mat-card-subtitle>
+
+      <mat-card-content>
+        <p class="article-description">{{ article.content }}</p>
+        <p class="article-date"><strong>Publicado el:</strong> {{ article.createdAt | date }}</p>
+        <p class="article-date"><strong>Última actualización:</strong> {{ article.updatedAt | date }}</p>
+      </mat-card-content>
+
+
+      <div class="button-group">
+        @if(isAuthenticated && isReader) {
+          <!--<a [href]="book.filePath" target="_blank" class="download-link auth-required">Descargar libro</a>-->
+          <button class="back-button" (click)="goBackToHome()">Regresar a Home</button>
+        }@else {
+          <button class="back-button" (click)="goBackToHome()">Regresar a Home</button>
+        }
+
       </div>
-    </mat-card>
-  
-  }@else{
-    <p class="no-article-message">No se encontró el articulo</p>
-  
-  }
+
+    </div>
+  </mat-card>
+
+}@else{
+  <p class="no-article-message">No se encontró el articulo</p>
+
+}

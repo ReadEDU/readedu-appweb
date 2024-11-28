@@ -3,17 +3,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-
-
-import { ArticleDetailsResponse } from '../../../shared/models/article-details-response.model';
 import { HomeService } from '../../../core/services/home.service';
+import { ArticleDetailsResponse } from '../../../shared/models/article-details-response.model';
+import { ArticleCardComponent } from '../../../shared/components/article-card/article-card.component';
+import { ApiImgPipe } from '../../../core/pipes/api-img.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     MatFormFieldModule, MatInputModule, MatIconModule, FormsModule,
-  
+    ArticleCardComponent
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']

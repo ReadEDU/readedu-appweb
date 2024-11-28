@@ -75,7 +75,7 @@
     margin: 5px 0 15px 0;
   }
   
-  .article-description {
+  .article-content {
     color: #666;
     font-size: 1rem;
     line-height: 1.6;
@@ -150,7 +150,7 @@
       font-size: 1.3rem;
     }
   
-    .article-description,
+    .article-content,
     .article-price,
     .article-date {
       font-size: 0.95rem;

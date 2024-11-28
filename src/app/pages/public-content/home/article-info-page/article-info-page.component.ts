@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { ArticleDetailsComponent } from '../../../../shared/components/article-details/article-details.component';
+import { ArticleReviewsComponent } from '../../../../shared/components/article-reviews/article-reviews.component';
 
 @Component({
   selector: 'app-article-info-page',

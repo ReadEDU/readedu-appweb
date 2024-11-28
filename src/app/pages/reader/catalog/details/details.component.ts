@@ -7,8 +7,8 @@ import { ArticleReviewsComponent } from '../../../../shared/components/article-r
   selector: 'app-article-info-page',
   standalone: true,
   imports: [ArticleDetailsComponent, ArticleReviewsComponent],
-  templateUrl: './articles.component.html',
-  styleUrl: './articles.component.css'
+  templateUrl: './details.component.html',
+  styleUrl: './details.component.css'
 })
 export class DetailsComponent {
   articleId: number;

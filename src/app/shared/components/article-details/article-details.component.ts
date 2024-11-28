@@ -30,13 +30,13 @@ export class ArticleDetailsComponent implements OnInit {
 
 
   isAuthenticated = false;
-  isCustomer: boolean = false;
+  isReader: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.isCustomer = this.authService.getUserRole() === 'CUSTOMER';
+    this.isReader = this.authService.getUserRole() === 'READER';
 
     if (this.articleId) {
       this.loadArticleDetails(this.articleId);
@@ -51,7 +51,7 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   goBackToHome(): void {
-    const routePath = this.isCustomer ? '/reader/catalog' : '/home';
+    const routePath = this.isReader ? '/reader/catalog' : '/home';
     this.router.navigate([routePath]);
   }
 

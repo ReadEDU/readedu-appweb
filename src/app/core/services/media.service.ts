@@ -8,20 +8,20 @@ import { UploadMediaResponse } from '../../shared/models/upload-media-request.mo
   providedIn: 'root',
 })
 export class MediaService {
-  private apiURL = `${environment.apiURL}/media`;
+  private baseURL = `${environment.apiURL}/media`;
   private http = inject(HttpClient);
 
   constructor() {}
 
   upload(formData: FormData): Observable<UploadMediaResponse> {
     return this.http.post<UploadMediaResponse>(
-      `${this.apiURL}/upload`,
+      `${this.baseURL}/upload`,
       formData
     );
   }
 
   getMedia(filename: string): Observable<Blob> {
-    const url = `${this.apiURL}/${filename}`;
+    const url = `${this.baseURL}/${filename}`;
     return this.http.get(url, { responseType: 'blob' });
   }
 }
