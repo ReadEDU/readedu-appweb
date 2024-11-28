@@ -1,0 +1,28 @@
+<div class="reviews-container">
+    <h2>Reseñas de Articulos</h2>
+  
+    @for (review of reviews; track review){
+    <mat-card class="review-card">
+      <mat-card-header>
+        <div mat-card-avatar class="review-avatar">{{ review.reviewer[0] }}</div>
+        <mat-card-title>{{ review.reviewer }}</mat-card-title>
+        <mat-card-subtitle>{{
+          review.date | date : "longDate"
+        }}</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <div class="rating">
+          @for (star of [1, 2, 3, 4, 5]; track star){
+          <mat-icon>{{
+            star <= review.rating ? "star" : "star_border"
+          }}</mat-icon>
+          }
+        </div>
+        <p class="comment">{{ review.comment }}</p>
+      </mat-card-content>
+    </mat-card>
+    }@empty {
+    <p>No hay reseñas disponibles</p>
+    }
+  </div>
