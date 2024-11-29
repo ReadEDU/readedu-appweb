@@ -8,6 +8,7 @@ import { ArticleListComponent } from './article-management/article-list/article-
 import { CategoryFormComponent } from './category-management/category-form/category-form.component';
 import { CategoryListComponent } from './category-management/category-list/category-list.component';
 import  ArticleFormComponent  from './article-management/article-form/article-form.component';
+import { DonationsComponent } from './donations/donations.component';
 
 export const creatorRoutes: Routes = [
   {
@@ -19,6 +20,7 @@ export const creatorRoutes: Routes = [
       { path: 'articles/list', component: ArticleListComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'profile/update', component: UpdateProfileComponent },
+      { path: 'donations', component: DonationsComponent },
       
       { path: 'categories/new', component: CategoryFormComponent },
       { path: 'categories/edit/:id', component: CategoryFormComponent },

@@ -1,24 +1,32 @@
 <div class="content-wrapper">
-    <div class="search-container">
-      <mat-form-field class="search-bar" appearance="outline">
-        <mat-label>Buscar articulos</mat-label>
-        <input
-          matInput
-          placeholder="Busca por título o autor"
-          [(ngModel)]="searchQuery"
-          (ngModelChange)="onSearch()"
-        />
-        <button mat-icon-button matSuffix>
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-  
-    <div class="article-list">
-      @for (article of filteredArticles; track article) {
-      <app-article-card [article]="article"></app-article-card>
-      }@empty {
-      <p>No se encontraron articulos</p>
-      }
-    </div>
+  <!-- Minimalist Search Bar -->
+  <div class="search-container">
+    <mat-form-field class="search-bar" appearance="outline">
+      <mat-label>Buscar artículos</mat-label>
+      <input matInput 
+             [(ngModel)]="searchQuery" 
+             (ngModelChange)="onSearch()"
+             placeholder="Título o autor">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
   </div>
+
+  <!-- Articles Grid -->
+  <div class="article-grid">
+    @for (article of filteredArticles; track article.id) {
+      <div class="article-card" (click)="viewArticleDetails(article.id)">
+        <img [src]="article.coverPath | apiImg" 
+             [alt]="article.title"
+             class="article-image">
+        <div class="article-content">
+          <h3 class="article-title">{{ article.title }}</h3>
+          <p class="article-creator">Por {{ article.creatorName }}</p>
+          <p class="article-description">{{ article.content }}</p>
+          <a class="view-details">Ver detalles</a>
+        </div>
+      </div>
+    } @empty {
+      <p>No se encontraron artículos</p>
+    }
+  </div>
+</div>
