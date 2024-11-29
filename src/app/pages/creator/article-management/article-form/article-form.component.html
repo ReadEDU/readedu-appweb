@@ -1,132 +1,113 @@
 <div class="article-form-container">
-    <h1>@if(articleId) { Editar } @else { Nuevo } articulo</h1>
-  
-    @if(errors.length) {
-    <div class="alert alert-danger mt-5">
+  <h2 class="form-title">{{ articleId ? 'Editar' : 'Nuevo' }} artículo</h2>
+
+  @if(errors.length) {
+    <div class="alert alert-danger">
       <ul>
-        @for (error of errors; track error ) {
-        <li>{{ error }}</li>
+        @for (error of errors; track error) {
+          <li>{{ error }}</li>
         }
       </ul>
     </div>
-    } @if(form) {
-    <div class="row">
-      <div class="col-md-8">
-        <form
-          [formGroup]="form"
-          (ngSubmit)="save()"
-          class="mt-5"
-          autocomplete="off"
-        >
-          <mat-form-field class="form-field w-100" appearance="outline">
+  }
+
+  @if(form) {
+    <form [formGroup]="form" (ngSubmit)="save()" class="article-form">
+      <div class="form-content">
+        <div class="form-fields">
+          <!-- Título -->
+          <mat-form-field appearance="outline">
             <mat-label>Título</mat-label>
-            <input
-              matInput
-              type="text"
-              placeholder="Título"
-              formControlName="title"
-              (keyup)="createSlug()"
-            />
-            <mat-error>
-              @if(form.get('title')!.hasError('required')) { Este título es
-              obligatorio } @else if (form.get('title')?.hasError('minlength')) {
-              El título debe tener al menos 3 caracteres } @else if
-              (form.get('title')?.hasError('maxlength')) { El título debe tener
-              250 caracteres como máximo }
-            </mat-error>
+            <input matInput formControlName="title" (keyup)="createSlug()">
+            @if(form.get('title')?.hasError('required')) {
+              <mat-error>El título es requerido</mat-error>
+            }
           </mat-form-field>
-  
-          <mat-form-field class="form-field w-100" appearance="outline">
+
+          <!-- Slug -->
+          <mat-form-field appearance="outline">
             <mat-label>Slug</mat-label>
-            <input
-              matInput
-              type="text"
-              placeholder="Slug"
-              formControlName="slug"
-            />
-            <mat-error>
-              @if(form.get('slug')!.hasError('required')) { Este slug es
-              obligatorio } @else if (form.get('slug')!.hasError('pattern')) { El
-              slug es inválido }
-            </mat-error>
+            <input matInput formControlName="slug">
+            @if(form.get('slug')?.hasError('required')) {
+              <mat-error>El slug es requerido</mat-error>
+            }
           </mat-form-field>
-  
-          <mat-form-field class="form-field w-100" appearance="outline">
+
+          <!-- Contenido -->
+          <mat-form-field appearance="outline">
             <mat-label>Contenido</mat-label>
-            <textarea
-              matInput
-              placeholder="Contenido"
-              formControlName="content"
-            ></textarea>
-            <mat-error>
-              @if(form.get('content')!.hasError('required')) { El contenido
-              es obligatorio }
-            </mat-error>
+            <textarea matInput formControlName="content" rows="5"></textarea>
+            @if(form.get('content')?.hasError('required')) {
+              <mat-error>El contenido es requerido</mat-error>
+            }
           </mat-form-field>
-    
-          <mat-form-field class="form-field w-100" appearance="outline">
+
+          <!-- Categoría -->
+          <mat-form-field appearance="outline">
             <mat-label>Categoría</mat-label>
             <mat-select formControlName="categoryId">
-              @for (category of categories; track category.id) {
-              <mat-option [value]="category.id">{{ category.name }}</mat-option>
+              @for(category of categories; track category.id) {
+                <mat-option [value]="category.id">{{ category.name }}</mat-option>
               }
             </mat-select>
-  
-            <mat-error>
-              @if(form.get('categoryId')!.hasError('required')) { La categoría es
-              obligatoria }
-            </mat-error>
+            @if(form.get('categoryId')?.hasError('required')) {
+              <mat-error>La categoría es requerida</mat-error>
+            }
           </mat-form-field>
-  
-          <div class="file-upload w-100">
-            <label>Portada</label>
-            <input
-              type="file"
-              class="form-control"
-              accept=".png,.jpg,.jpeg"
-              (change)="uploadFile($event, 'coverPath')"
-            />
-            <div class="small text-muted">
-              Ruta actual: {{ form.get("coverPath")!.value }}
-            </div>
+
+          <!-- Portada -->
+          <div class="file-upload-container">
+            <label class="file-upload-label">
+              <i class="fa fa-download upload-icon"></i>
+              <span>Portada</span>
+              <input type="file" 
+                     (change)="uploadFile($event, 'coverPath')" 
+                     accept=".png,.jpg,.jpeg"
+                     class="file-input">
+            </label>
+            @if(form.get('coverPath')?.value) {
+              <span class="file-name">{{ form.get('coverPath')?.value }}</span>
+            }
           </div>
-  
-          <div class="file-upload w-100">
-            <label>Archivo PDF</label>
-            <input
-              type="file"
-              class="form-control"
-              accept="application/pdf"
-              (change)="uploadFile($event, 'filePath')"
-            />
-            <div class="small text-muted">
-              Ruta actual: {{ form.get("filePath")!.value }}
-            </div>
+
+          <!-- PDF -->
+          <div class="file-upload-container">
+            <label class="file-upload-label">
+              <i class="fa fa-download upload-icon"></i>
+              <span>Archivo PDF</span>
+              <input type="file" 
+                     (change)="uploadFile($event, 'filePath')" 
+                     accept=".pdf"
+                     class="file-input">
+            </label>
+            @if(form.get('filePath')?.value) {
+              <span class="file-name">{{ form.get('filePath')?.value }}</span>
+            }
           </div>
-  
-          <div class="action-buttons text-end">
-            <button mat-button type="button" routerLink="/creator/articles/list">
-              Cancelar
-            </button>
-            <button mat-raised-button color="primary" class="ms-2">
-              @if(articleId) { Actualizar } @else { Crear } articulo
-            </button>
-          </div>
-        </form>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-container">
+          <h3>Portada</h3>
+          @if(form.get('coverPath')?.value) {
+            <img [src]="form.get('coverPath')?.value | apiImg" 
+                 alt="Vista previa" 
+                 class="preview-image">
+          } @else {
+            <div class="no-image">Sin imagen</div>
+          }
+        </div>
       </div>
-  
-      <div class="col-md-4 text-center preview">
-        @if(form.get('coverPath')?.value) {
-        <h3>Portada</h3>
-        <img
-          [src]="form.get('coverPath')?.value | apiImg"
-          alt="Portada"
-          class="img-thumbnail"
-        />
-        } @else {
-        <p>Sin portada</p>
-        }
+
+      <!-- Botones -->
+      <div class="button-container">
+        <button mat-button type="button" routerLink="/creator/articles/list">
+          Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          {{ articleId ? 'Actualizar' : 'Crear' }} artículo
+        </button>
       </div>
-    </div>
-    }
-  </div>
+    </form>
+  }
+</div>

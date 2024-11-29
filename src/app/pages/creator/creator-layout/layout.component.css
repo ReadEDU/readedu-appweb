@@ -1,109 +1,143 @@
-/* Layout principal */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
 .layout-dashboard {
-    display: flex;
-    height: 100vh;
-  }
-  
-  /* Estilo para el Navbar */
-  app-navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1050;
-  }
-  
-  /* Sidebar ajustado con botón de toggle */
-  .layout-sidebar {
-    position: fixed;
-    top: 70px; /* Ajusta según la altura del navbar */
-    left: 0;
-    bottom: 70px; /* Ajusta según la altura del footer */
-    width: 250px;
-    background-color: #343a40;
-    color: #ffffff;
-    overflow-y: auto;
-    transition: width 0.3s ease-in-out;
-    z-index: 1040;
-  }
-  
-  .layout-sidebar.collapsed {
-    width: 0;
-    overflow: hidden;
-  }
-  
-  /* Estilos de lista del Sidebar */
-  .layout-sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .layout-sidebar nav ul li {
-    margin: 10px 0;
-    padding: 10px 20px;
-  }
-  
-  .layout-sidebar nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-  
-  .layout-sidebar nav ul li a i {
-    margin-right: 10px;
-  }
-  
-  .layout-sidebar nav ul li a:hover,
-  .layout-sidebar nav ul li a.active {
-    background-color: #495057;
-  }
-  
-  /* Contenido principal ajustado al sidebar */
-  .layout-content {
-    flex-grow: 1;
-    padding: 90px 20px 70px 20px; /* Ajuste para el navbar y footer */
-    margin-left: 250px; /* Se ajusta según el tamaño del sidebar */
-    transition: margin-left 0.3s ease-in-out;
-  }
-  
-  .layout-sidebar.collapsed + .layout-content {
-    margin-left: 0;
-  }
-  
-  /* Botón de toggle para el sidebar */
-  .sidebar-toggle-btn {
-    position: fixed;
-    top: 70px; /* Ajusta según la altura del navbar */
-    left: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1060;
-    color: #ffffff;
-  }
-  
-  /* Iconos del sidebar según el estado */
-  .icon-white {
-    color: #ffffff;
-  }
-  
-  .icon-black {
-    color: #000000;
-  }
-  
-  /* Estilo para el Footer */
-  app-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 70px;
-    background-color: #343a40;
-    color: #ffffff;
-    text-align: center;
-    z-index: 1050;
-  }
+  display: flex;
+  height: 100vh;
+}
+
+/* Navbar */
+app-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
+/* Sidebar */
+.layout-sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #62a355;
+  color: #ffffff;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1040;
+  overflow-y: auto;
+}
+
+.layout-sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+.layout-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.layout-sidebar nav ul li {
+  margin: 10px 0;
+  padding: 10px 20px;
+}
+
+.layout-sidebar nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.layout-sidebar nav ul li a i {
+  margin-right: 10px;
+}
+
+.layout-sidebar nav ul li a:hover,
+.layout-sidebar nav ul li a.active {
+  background-color: #495057;
+}
+
+/* Botón de toggle para el sidebar */
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #f9f9f9; /* Fondo claro */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 1060;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: #eaeaea;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el icono de "hamburguesa" */
+.navbar-toggler-icon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #333; /* Color de las líneas */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before {
+  top: -6px; /* Ajuste para la línea superior */
+}
+
+.navbar-toggler-icon::after {
+  top: 6px; /* Ajuste para la línea inferior */
+}
+
+/* Contenido Principal */
+.layout-content {
+  flex-grow: 1;
+  padding: 80px 20px;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.layout-sidebar.collapsed + .layout-content {
+  margin-left: 0;
+}
+
+/* Footer */
+app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #343a40;
+  color: #ffffff;
+  text-align: center;
+  z-index: 1050;
+}

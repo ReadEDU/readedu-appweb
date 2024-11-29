@@ -1,7 +1,6 @@
 <app-navbar />
 
 <div class="layout-dashboard">
-
   <button
     class="sidebar-toggle-btn"
     [class.active]="isSidebarActive"
@@ -22,18 +21,21 @@
       <ul>
         <li>
           <a routerLink="/creator/articles/list" routerLinkActive="active">
-            <i class="fas fa-articles"></i> Articulos
+            <i class="fas fa-newspaper"></i> Artículos
           </a>
         </li>
-       </ul>
+        <li>
+          <a routerLink="/creator/donations" routerLinkActive="active">
+            <i class="fas fa-hand-holding-heart"></i> Donaciones
+          </a>
+        </li>
+      </ul>
     </nav>
   </div>
-
 
   <div class="layout-content">
     <router-outlet />
   </div>
 </div>
-
 
 <app-footer />
