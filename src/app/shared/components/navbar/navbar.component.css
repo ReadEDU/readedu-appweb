@@ -1,76 +1,81 @@
-/* Estilos para la barra lateral (sidebar) */
-.layout-sidebar {
-    width: 250px;
-    transition: width 0.3s ease;
-    background-color: #696464; /* Fondo gris oscuro */
-    color: #ffffff; /* Texto en blanco */
-    position: relative;
-}
-
-.layout-sidebar.collapsed {
-    width: 60px;
-    overflow: hidden;
-}
-
-/* Botón para colapsar el sidebar */
-.sidebar-toggle-btn {
-    background: none;
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0.8rem 1.5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-brand {
+    color: #5E9952;
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-decoration: none;
+  }
+  
+  .navbar-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.8rem;
+  }
+  
+  .nav-link {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #5E9952;
+  }
+  
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .dropdown-menu {
     border: none;
-    color: #ffffff; /* Texto blanco */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
     padding: 0.5rem;
-    position: absolute;
-    top: 1rem;
-    right: -2.5rem;
-    cursor: pointer;
-    outline: none;
-}
-
-.sidebar-toggle-btn .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;base64,..."); /* Icono SVG de Bootstrap */
-}
-
-/* Ajuste del contenido al lado del sidebar */
-.layout-content {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
-}
-
-.layout-sidebar.collapsed + .layout-content {
-    margin-left: 60px;
-}
-
-/* Botón "Iniciar Sesión" (Borde verde con fondo blanco) */
-.navbar .btn-outline-primary {
-    border-color: #16a085; /* Borde verde */
-    color: #16a085; /* Texto verde */
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 8px 20px;
+  }
+  
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
     transition: all 0.3s ease;
-}
-
-.navbar .btn-outline-primary:hover {
-    background-color: #16a085; /* Fondo verde al hover */
-    color: #ffffff; /* Texto blanco al hover */
-    border-color: #16a085;
-}
-
-/* Botón "Únete Ahora" (Fondo verde con texto blanco) */
-.navbar .btn-primary {
-    background-color: #16a085; /* Fondo verde */
-    color: #ffffff; /* Texto blanco */
-    border-radius: 5px;
-    padding: 8px 20px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: rgba(94, 153, 82, 0.1);
+    color: #5E9952;
+  }
+  
+  .btn-primary {
+    background-color: #5E9952;
     border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
     transition: all 0.3s ease;
-}
-
-.navbar .btn-primary:hover {
-    background-color: #1abc9c; /* Fondo verde más claro al hover */
-}
-
-.navbar-logo {
-    width: 30px; /* Ajusta el tamaño del logo según lo que prefieras */
-    height: auto;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4c7b42;
+    transform: translateY(-1px);
+  }
+  
+  .btn-outline-primary {
+    color: #5E9952;
+    border: 2px solid #5E9952;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #5E9952;
+    color: white;
+    transform: translateY(-1px);
   }
   

@@ -39,13 +39,11 @@ import { ArticleDetailsResponse } from '../../../../shared/models/article-detail
     MatSnackBarModule,
   ],
 })
-export default class ArticleFormComponent  {
+export default class ArticleFormComponent implements OnInit {
   private articleService = inject(ArticleService);
   private mediaService = inject(MediaService);
   private categoryService = inject(CategoryService);
   private authService = inject(AuthService);
-
-
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -54,12 +52,10 @@ export default class ArticleFormComponent  {
   categories: CategoryResponse[] = [];
   errors: string[] = [];
   articleId?: number;
-// No se encuentra el id del creador
+  isUploading = false;
+
   form: FormGroup = this.fb.group({
-    title: [
-      '',
-      [Validators.required, Validators.minLength(3), Validators.maxLength(250)],
-    ],
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
     slug: ['', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
     content: ['', [Validators.required]],
     coverPath: ['', Validators.required],
@@ -80,7 +76,6 @@ export default class ArticleFormComponent  {
       },
       error: () => this.errors.push('Error al cargar las categorías.'),
     });
-    console.log(this.categories);
   }
 
   private loadArticleForEdit(): void {
@@ -103,29 +98,41 @@ export default class ArticleFormComponent  {
   uploadFile(event: Event, control: string): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
+      this.isUploading = true;
       const formData = new FormData();
       formData.append('file', file);
+      
       this.mediaService.upload(formData).subscribe({
-        next: (response) => this.form.controls[control].setValue(response.path),
-        error: () => this.errors.push('Error al cargar el archivo.'),
+        next: (response) => {
+          this.form.controls[control].setValue(response.path);
+          this.isUploading = false;
+          this.showSnackBar('Archivo subido correctamente');
+        },
+        error: () => {
+          this.errors.push('Error al cargar el archivo.');
+          this.isUploading = false;
+          this.showSnackBar('Error al subir el archivo');
+        }
       });
     }
   }
 
   createSlug(): void {
-    const slug = this.form
-      .get('title')
-      ?.value.toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-    this.form.get('slug')?.setValue(slug);
+    const title = this.form.get('title')?.value;
+    if (title) {
+      const slug = title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+      this.form.get('slug')?.setValue(slug);
+    }
   }
 
   save(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.isUploading) {
       this.form.markAllAsTouched();
       return;
     }
@@ -141,17 +148,19 @@ export default class ArticleFormComponent  {
 
     request.subscribe({
       next: () => {
-        this.snackBar.open('Artículo guardado exitosamente', 'Cerrar', {
-          duration: 3000,
-        });
+        this.showSnackBar('Artículo guardado exitosamente');
         this.router.navigate(['/creator/articles/list']);
       },
       error: (error) => {
         this.errors = error.error.errors || ['Error al guardar el artículo'];
-        this.snackBar.open('Error al guardar el artículo', 'Cerrar', {
-          duration: 3000,
-        });
+        this.showSnackBar('Error al guardar el artículo');
       },
+    });
+  }
+
+  private showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
     });
   }
 }
