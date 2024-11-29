@@ -1,10 +1,49 @@
-<div class="article-info-page-container">
-    <h2>Detalles del Articulo</h2>
-  
-    <div class="article-content">
-  
-      <app-article-details [articleId]="articleId"/>
-      <app-article-reviews [articleId]="articleId"/>
-  
-    </div>
+<div class="article-container">
+  <div class="article-header">
+    <h1 class="article-title">Detalles del Artículo</h1>
+    <button class="back-button" (click)="goBack()">Regresar a Home</button>
   </div>
+
+  @if(article) {
+    <div class="article-content">
+      <img [src]="article.coverPath | apiImg" 
+           [alt]="article.title" 
+           class="article-image">
+      
+      <a [href]="article.filePath | apiImg" 
+         download 
+         class="download-icon" 
+         title="Descargar artículo">
+        <i class="fa fa-download" aria-hidden="true"></i>
+      </a>
+
+      <h2>{{ article.title }}</h2>
+      
+      <div class="article-metadata">
+        <span><i class="fa fa-user"></i> {{ article.creatorName }}</span>
+        <span><i class="fa fa-folder"></i> {{ article.categoryName }}</span>
+        <span><i class="fa fa-calendar"></i> {{ article.createdAt | date }}</span>
+      </div>
+
+      <div class="article-text">
+        {{ article.content }}
+      </div>
+
+      <div class="comments-section">
+        <form class="comment-form" (ngSubmit)="submitComment()">
+          <textarea 
+            class="comment-input" 
+            [(ngModel)]="newComment" 
+            name="comment"
+            placeholder="Añadir un comentario..."
+            rows="3"></textarea>
+          <button type="submit" class="submit-comment">
+            Enviar comentario
+          </button>
+        </form>
+      </div>
+    </div>
+  } @else {
+    <p>Cargando artículo...</p>
+  }
+</div>

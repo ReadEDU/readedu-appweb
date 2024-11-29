@@ -1,21 +1,68 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ArticleDetailsComponent } from '../../../../shared/components/article-details/article-details.component';
-import { ArticleReviewsComponent } from '../../../../shared/components/article-reviews/article-reviews.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { ApiImgPipe } from '../../../../core/pipes/api-img.pipe';
+import { HomeService } from '../../../../core/services/home.service';
+import { ArticleDetailsResponse } from '../../../../shared/models/article-details-response.model';
 
 @Component({
-  selector: 'app-article-info-page',
+  selector: 'app-details',
   standalone: true,
-  imports: [ArticleDetailsComponent, ArticleReviewsComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ApiImgPipe
+  ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
 export class DetailsComponent {
-  articleId: number;
-  private route=inject(ActivatedRoute);
+  article?: ArticleDetailsResponse;
+  newComment: string = '';
+  
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private homeService = inject(HomeService);
+  private snackBar = inject(MatSnackBar);
 
   constructor() {
-    this.articleId = +this.route.snapshot.paramMap.get('id')!;
-    console.log(this.articleId);
+    const articleId = +this.route.snapshot.paramMap.get('id')!;
+    this.loadArticle(articleId);
+  }
+
+  private loadArticle(articleId: number): void {
+    this.homeService.getArticleDetailsById(articleId).subscribe({
+      next: (article) => {
+        this.article = article;
+      },
+      error: (error) => {
+        console.error('Error loading article:', error);
+        this.showSnackBar('Error al cargar el artículo');
+      }
+    });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/reader/catalog']);
+  }
+
+  submitComment(): void {
+    if (!this.newComment.trim()) {
+      this.showSnackBar('El comentario no puede estar vacío');
+      return;
+    }
+
+    // TODO: Implementar la lógica de envío de comentarios cuando esté disponible el backend
+    this.showSnackBar('Funcionalidad de comentarios en desarrollo');
+    this.newComment = '';
+  }
+
+  private showSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+    });
   }
 }
